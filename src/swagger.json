@@ -1,0 +1,309 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Supermercado",
+        "description": "Esta API tem como objetivo cadastrar categorias de produtos",
+        "contact": {
+            "email": "ericklimacosta@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/categoria": {
+            "post": {
+                "summary": "Cadastro de Categoria",
+                "description": "Cadastro das categorias dos produtos",
+                "tags": [
+                    "categoria"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Categoria"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "400": {
+                        "description": "Categoria Já Existe."
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Obter Categorias",
+                "description": "Obter todas as categorias",
+                "tags": [
+                    "categoria"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Categoria"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categoria/{categoriaId}": {
+            "put": {
+                "summary": "Atualizar Categoria",
+                "description": "Atualiza uma categoria existente",
+                "tags": ["categoria"],
+                "parameters": [
+                    {
+                        "name": "categoriaId",
+                        "in": "path",
+                        "description": "ID da categoria a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Categoria"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Excluir Categoria",
+                "description": "Exclui uma categoria existente",
+                "tags": ["categoria"],
+                "parameters": [
+                    {
+                        "name": "categoriaId",
+                        "in": "path",
+                        "description": "ID da categoria a ser excluída",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "404": {
+                        "description": "Categoria não encontrada"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/produto": {
+            "post": {
+                "summary": "Cadastro de Produto",
+                "description": "Cadastro dos Produto de cada Categoria",
+                "tags": [
+                    "produto"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema":{
+                                "$ref": "#/components/schemas/Produto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "400": {
+                        "description": "Produto Já Existe."
+                    },
+                    "500": {
+                        "description": "Ocorreu um Erro no Servidor."
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Categoria"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get":{
+                "summary": "Obter Produtos",
+                "description": "Obter Todos Os Produtos cadastrado em cada Categoria Relacionada.",
+                "tags": [
+                    "produto"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Categoria"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/produto/{produtoId}": {
+            "put": {
+                "summary": "Atualizar Produto",
+                "description": "Atualiza uma Produto existente",
+                "tags": ["produto"],
+                "parameters": [
+                    {
+                        "name": "produtoId",
+                        "in": "path",
+                        "description": "ID da Produto a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Produto"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "404": {
+                        "description": "Produto não encontrada"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Excluir Produto",
+                "description": "Exclui uma Produto existente",
+                "tags": ["produto"],
+                "parameters": [
+                    {
+                        "name": "produtoId",
+                        "in": "path",
+                        "description": "ID da Produto a ser excluída",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Não Autorizado"
+                    },
+                    "404": {
+                        "description": "Produto não encontrada"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Categoria": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Produto": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "quantidade": {
+                        "type": "number"
+                    },
+                    "category_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
